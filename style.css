@@ -25,16 +25,17 @@ Fonts:
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 30px;
+  padding: 16px;
   background-color: #f0f0f0;
   color: #333;
 }
 
 .container {
   max-width: 750px;
-  margin: 50px auto;
+  width: min(750px, 96vw);
+  margin: 28px auto;
   background-color: #fff;
-  padding: 40px;
+  padding: 24px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
@@ -78,15 +79,17 @@ h1 img {
 .game-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 8px;
   margin: 0 auto;
-  max-width: 500px;
+  width: min(720px, 100%);
+  height: min(68vh, 540px); /* keep the game area within the viewport */
+  max-width: 100%;
 }
 
 .grid-cell {
   background-color: #e8e8e8;
   border-radius: 8px;
-  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,6 +97,14 @@ h1 img {
   transition: background-color 0.3s;
   position: relative;
   overflow: hidden;
+  min-height: 0; /* allow grid row sizing to control height */
+}
+
+/* Small screens tweaks */
+@media (max-width: 480px) {
+  .container { padding: 16px; margin: 16px auto; }
+  .game-grid { gap: 6px; height: min(62vh, 520px); }
+  .player { height: 30%; }
 }
 
 .water-can-wrapper {
@@ -140,4 +151,29 @@ button {
   display: block;
   margin: 30px auto 0;
   transition: background-color 0.2s;
+}
+
+/* Player and obstacle visuals for the dodge game */
+.obstacle {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  background-color: #F5402C;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.player {
+  position: absolute;
+  width: 70%;
+  height: 28%;
+  background-color: #2E9DF7;
+  border-radius: 6px;
+  bottom: 12%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12);
 }
